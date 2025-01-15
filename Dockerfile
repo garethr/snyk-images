@@ -41,7 +41,9 @@ COPY --from=snyk-alpine ./snyk /usr/local/bin/snyk
 
 FROM parent as linux
 COPY --from=snyk ./snyk /usr/local/bin/snyk
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y ca-certificates git
-RUN apt-get auto-remove -y && apt-get clean -y && rm -rf /var/lib/apt/
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    git \
+    && apt-get auto-remove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
