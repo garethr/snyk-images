@@ -36,7 +36,7 @@ RUN install-snyk.py $SNYK_CLI_VERSION
 
 FROM parent as alpine
 RUN apk update && apk upgrade --no-cache
-RUN apk add --no-cache libstdc++ git
+RUN apk add --no-cache git
 COPY --from=snyk-alpine ./snyk /usr/local/bin/snyk
 
 FROM parent as linux
